@@ -20,6 +20,10 @@ Box.prototype = {
   getMrMeeseks: function getMrMeeseks() {
     return this.mrMeeseks;
   },
+
+  pressButton: function pressButton(dimension) {
+    dimension.push(this.createMrMeeseks());
+  },
 };
 
 var factory = (function () {
