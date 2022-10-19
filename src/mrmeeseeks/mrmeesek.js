@@ -7,6 +7,20 @@ function MrMeesek() {
   ];
 }
 
+MrMeesek.prototype = {
+    speakOnRequest: function speakOnRequest() {
+        return this.messageOnRequest[Math.floor(Math.random() * 3)]
+    },
+
+    makeRequest: function makeRequest(action, subject) {
+        function execute(object) {
+            return action + " " + object
+        }
+        this.action = execute(subject)
+        return this.action
+    }
+}
+
 var factory = (function () {
   const instance = new MrMeesek();
 
