@@ -96,5 +96,21 @@ describe("Object properties testing", () => {
         const newMeesek = box.createMrMeeseks()
         expect(newMeesek).not.toHaveProperty('action')
         expect(newMeesek.hasOwnProperty('action')).toBeFalsy()
+
+        expect(Object.getPrototypeOf(newMeesek)).not.toHaveProperty('action')
+        expect(Object.getPrototypeOf(newMeesek)).not.toHaveProperty('action')
+    })
+
+    test("", () => {
+        const MeesekMakeRequestMock = jest.fn()
+        .mockImplementation( () => "open" + " " + "Jerry's stupid mayonnaise jar" )
+        .mockName('MeesekMakeRequestMock')
+
+        meesek.action = MeesekMakeRequestMock
+        expect(meesek).toHaveProperty('action')
+
+        expect(meesek.fulFillRequest()).toEqual(expect.stringMatching("open" + " " + "Jerry's stupid mayonnaise jar" + " " + "All done!!"))
+
+        expect(MeesekMakeRequestMock).toHaveBeenCalled()
     })
 })
