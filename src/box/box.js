@@ -13,8 +13,7 @@ Box.prototype = {
     if (!this.mrMeeseks) this.mrMeeseks = meeseksFactory.singletonMeesek.get();
 
     // Creates new object based in a prototype.
-    const proto = Object.create(this.mrMeeseks);
-    return proto;
+    return Object.create(this.mrMeeseks);
   },
 
   getMrMeeseks: function getMrMeeseks() {
