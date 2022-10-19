@@ -98,10 +98,9 @@ describe("Object properties testing", () => {
         expect(newMeesek.hasOwnProperty('action')).toBeFalsy()
 
         expect(Object.getPrototypeOf(newMeesek)).not.toHaveProperty('action')
-        expect(Object.getPrototypeOf(newMeesek)).not.toHaveProperty('action')
     })
 
-    test("", () => {
+    test("Full fill request without depending on MrMeesek.makeRequest() invokation", () => {
         const MeesekMakeRequestMock = jest.fn()
         .mockImplementation( () => "open" + " " + "Jerry's stupid mayonnaise jar" )
         .mockName('MeesekMakeRequestMock')
@@ -112,5 +111,22 @@ describe("Object properties testing", () => {
         expect(meesek.fulFillRequest()).toEqual(expect.stringMatching("open" + " " + "Jerry's stupid mayonnaise jar" + " " + "All done!!"))
 
         expect(MeesekMakeRequestMock).toHaveBeenCalled()
+    })
+})
+
+describe("Change prototype properties value", () => {
+    test("Change MrMeesek.prototype.messageOnCreate value", () => {
+        let meesekToChange = box.createMrMeeseks()
+
+        // Get the prototype from the chain of prototypes and change its property value
+        Object.getPrototypeOf(meesekToChange).messageOnCreate = "Hi!!"
+        expect(meesekToChange.messageOnCreate).toEqual(expect.stringMatching("Hi!!"));
+
+        // The MrMeesek prototype now has a different propertie value.
+        expect(meesek.messageOnCreate).toEqual(expect.stringMatching("Hi!!"));
+
+        expect(meesekToChange.hasOwnProperty('messageOnCreate')).toBeFalsy()
+        expect(meesekToChange).toHaveProperty('messageOnCreate');
+
     })
 })
