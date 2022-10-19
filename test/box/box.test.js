@@ -53,7 +53,9 @@ describe("Shadowing of variables", () => {
     expect(objectProto.hasOwnProperty("messageOnCreate")).toBeTruthy();
 
     /**
-     * meesek object inherits from a prototype and has his own messageOnCreate property with a different value from his proto.
+     * meesek object inherits from a prototype and has his own messageOnCreate property with a
+     * different value from his proto.
+
      * See how the meesek prototype maintains a different messageOnCreate than the actual object.
      */
     expect(objectProto.messageOnCreate).toEqual(
