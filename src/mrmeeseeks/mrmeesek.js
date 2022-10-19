@@ -18,6 +18,10 @@ MrMeesek.prototype = {
         }
         this.action = execute(subject)
         return this.action
+    },
+
+    fulFillRequest: function fulFillRequest() {
+        return this.action() + " All done!!";
     }
 }
 
