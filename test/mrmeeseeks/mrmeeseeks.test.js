@@ -1,26 +1,28 @@
 const { expect } = require("@jest/globals");
 
-const meeseks = require("../../src/mrmeeseeks/mrmeesek");
-const box = require("../../src/box/box");
+const meesekFactory = require("../../src/mrmeeseeks/mrmeesek");
+const boxFactory = require("../../src/box/box");
 
-var boxSingleton = box.singletonBox.get();
+var box = boxFactory.singletonBox.get();
+var meesek = meesekFactory.singletonMeesek.get()
 
 describe("Meesek factory singleton", () => {
-  test("Create Meesek using factory", () => {
-    expect(meeseks.singletonMeesek.get()).toBeTruthy();
+    test("Create Meesek using factory", () => {
+        expect(meesek).toBeTruthy();
+        expect(meesek === meesekFactory.singletonMeesek.get()).toBeTruthy()
   });
 
   test("Factory returns the same meesek instance", () => {
-    const firstMeesekInstance = meeseks.singletonMeesek.get();
-    const secondMeesekInstance = meeseks.singletonMeesek.get();
+        const firstMeesekInstance = meesekFactory.singletonMeesek.get();
+        const secondMeesekInstance = meesekFactory.singletonMeesek.get();
 
-    expect(firstMeesekInstance === secondMeesekInstance).toBeTruthy();
+        expect(firstMeesekInstance === secondMeesekInstance).toBeTruthy();
   });
 });
 
-describe("", () => {
+describe("Shadowign of variables", () => {
   test("Shadowing variable 'messageOnCreate'", () => {
-    const meeseks = boxSingleton.createMrMeeseks();
+    const meeseks = box.createMrMeeseks();
     expect(meeseks).toHaveProperty("messageOnCreate");
 
     /**
@@ -42,10 +44,32 @@ describe("", () => {
     meeseks.messageOnCreate = "Caaaan dooooo!!";
     expect(meeseks.hasOwnProperty("messageOnCreate")).toBeTruthy();
 
-    const proto = boxSingleton.getMrMeeseks();
+    const proto = box.getMrMeeseks();
     expect(proto).toHaveProperty("messageOnCreate");
     expect(proto.messageOnCreate).toEqual(
       expect.stringMatching("I'm Mr Meeseeks! Look at meeee!")
     );
   });
 });
+
+describe("Mock box.pressButton", () => {
+    const BoxPressButtonMock = jest.fn()
+                                    .mockImplementation( dimension =>
+                                                        dimension.push(Object.create(meesek)))
+                                    .mockName('pressButtonMock')
+
+
+    let reality = []
+    let mockedBox = { pressButton: BoxPressButtonMock };
+
+    mockedBox.pressButton(reality)
+    expect(reality).toHaveLength(1);
+
+    expect(reality[0]).toHaveProperty(
+            "messageOnCreate",
+            "I'm Mr Meeseeks! Look at meeee!"
+            );
+
+    expect(reality[0]).toMatchObject(box.createMrMeeseks());
+
+})
