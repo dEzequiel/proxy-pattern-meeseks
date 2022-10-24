@@ -35,4 +35,4 @@ var factory = (function () {
   };
 })();
 
-exports.singletonMeesek = factory;
+Object.assign(module.exports, factory);
