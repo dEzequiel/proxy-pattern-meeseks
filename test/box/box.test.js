@@ -1,7 +1,7 @@
 const { expect } = require("@jest/globals");
 
 const factory = require("../../src/box/box");
-const box = factory.singletonBox.get();
+const box = factory.get();
 
 describe("Box factory singleton", () => {
   test("Create box using factory", () => {
@@ -10,8 +10,8 @@ describe("Box factory singleton", () => {
   });
 
   test("Factory returns the same box instance", () => {
-    const firstBoxInstance = factory.singletonBox.get();
-    const secondBoxInstance = factory.singletonBox.get();
+    const firstBoxInstance = factory.get();
+    const secondBoxInstance = factory.get();
 
     expect(firstBoxInstance === secondBoxInstance).toBeTruthy();
 
