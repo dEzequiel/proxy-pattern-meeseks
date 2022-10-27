@@ -1,5 +1,5 @@
 {
-  "name": "box",
+  "name": "proxy-pattern-box",
   "version": "1.0.0",
   "description": "Create Meeseks with this box!",
   "main": "box.js",
