@@ -1,0 +1,17 @@
+{
+  "name": "mrmeeseeks",
+  "version": "1.0.0",
+  "description": "Meet Meeseks",
+  "main": "mrmeesek.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "jest"
+  },
+  "author": "Ezequiel Dlr",
+  "license": "ISC",
+  "devDependencies": {
+    "jest": "^29.2.2"
+  }
+}
